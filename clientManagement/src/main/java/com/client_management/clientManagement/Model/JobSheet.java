@@ -19,6 +19,7 @@ public class JobSheet {
     private String contactInfo;
     private LocalDate receiveDate;
     private String inventoryReceive;
+    @Column(length = 999999)
     private byte[] inventoryImgDoc;
     private String reportIssue;
     private String clientNotes;

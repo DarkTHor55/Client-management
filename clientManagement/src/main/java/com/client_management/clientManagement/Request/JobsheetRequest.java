@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
 import lombok.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDate;
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import java.time.LocalDate;
 @Setter
 @Getter
 @Builder
-public class jobsheetRequest {
+public class JobsheetRequest {
 
     @NotBlank(message = "Client name is mandatory")
     private String clientName;
@@ -27,7 +28,7 @@ public class jobsheetRequest {
     @NotBlank(message = "Inventory received field cannot be blank")
     private String inventoryReceive;
 
-    private byte[] inventoryImgDoc;
+    private MultipartFile inventoryImgDoc;
 
     @NotBlank(message = "Report issue cannot be blank")
     private String reportIssue;
