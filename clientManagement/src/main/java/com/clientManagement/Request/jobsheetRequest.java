@@ -1,12 +1,17 @@
-package com.client_management.clientManagement;
+package com.clientManagement.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Positive;
+import lombok.*;
 
 import java.time.LocalDate;
-
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+@Builder
 public class jobsheetRequest {
 
     @NotBlank(message = "Client name is mandatory")
