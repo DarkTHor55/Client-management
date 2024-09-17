@@ -6,11 +6,14 @@ import com.client_management.clientManagement.Response.JobSheetResponse;
 import com.client_management.clientManagement.Service.Impl.JobSheetServiceImpl;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -45,14 +48,43 @@ public class JobSheetController {
         }
         return new ResponseEntity<>(jobSheet, HttpStatus.OK);
     }
+
+
     @PutMapping("/update/{id}")
-    public ResponseEntity<JobSheetResponse> updateJobSheet(final @PathVariable("id") long clientId, final @ModelAttribute JobsheetRequest jobSheetRequest)throws IOException  {
+    public ResponseEntity<JobSheetResponse> updateJobSheet(
+            @PathVariable("id") long clientId,
+            @RequestParam("clientName") String clientName,
+            @RequestParam("contactInfo") String contactInfo,
+            @RequestParam("receiveDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate receiveDate,
+            @RequestParam("inventoryReceive") String inventoryReceive,
+            @RequestParam(value = "inventoryImgDoc", required = false) MultipartFile inventoryImgDoc,
+            @RequestParam("reportIssue") String reportIssue,
+            @RequestParam(value = "clientNotes", required = false) String clientNotes,
+            @RequestParam("assignedTechnician") String assignedTechnician,
+            @RequestParam("deadline") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate deadline,
+            @RequestParam("price") double price,
+            @RequestParam("status") String status) throws IOException {
+        JobsheetRequest jobSheetRequest = JobsheetRequest.builder()
+                .clientName(clientName)
+                .contactInfo(contactInfo)
+                .receiveDate(receiveDate)
+                .inventoryReceive(inventoryReceive)
+                .inventoryImgDoc(inventoryImgDoc)
+                .reportIssue(reportIssue)
+                .clientNotes(clientNotes)
+                .assignedTechnician(assignedTechnician)
+                .deadline(deadline)
+                .price(price)
+                .status(status)
+                .build();
+
         JobSheet updatedJobSheet = jobSheetService.updateJobSheet(clientId, jobSheetRequest);
         if (Objects.isNull(updatedJobSheet)){
             return new ResponseEntity<>(JobSheetResponse.builder().status(false).message("Job Sheet Not Updated").build(), HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(JobSheetResponse.builder().status(true).message("Job Sheet Updated").build(), HttpStatus.OK);
     }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteJobSheet(final @PathVariable("id") long clientId){
         boolean isDeleted = jobSheetService.deleteJobSheet(clientId);
