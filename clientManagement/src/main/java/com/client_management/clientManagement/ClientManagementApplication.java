@@ -1,4 +1,4 @@
-package com.clientManagement;
+package com.client_management.clientManagement;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

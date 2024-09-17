@@ -1,4 +1,4 @@
-package com.clientManagement.Request;
+package com.client_management.clientManagement.Request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

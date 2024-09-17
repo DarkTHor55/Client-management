@@ -1,4 +1,4 @@
-package com.clientManagement.Model;
+package com.client_management.clientManagement.Model;
 
 import jakarta.persistence.*;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.clientManagement;
+package com.client_management.clientManagement;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
